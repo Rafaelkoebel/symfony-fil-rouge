@@ -10,8 +10,12 @@
     <title>Acceuil</title>
 </head>
 <body>
-    <div id="rouge">
-        <header>
+        {% block imageb %}
+        <div id="rouge" style="background-image: url('{{ asset('assets/img/rouge.jpg') }}')">
+        {% endblock %}
+        {% block imageh %}
+        <header style="background-image: url('{{ asset('assets/img/violet3.jpg') }}')">
+        {% endblock %}
             <a href="#menu">
                 <span class="iconify" id="burger"  data-icon="gg:menu" style="color: black;"></span>
             </a>
@@ -40,6 +44,9 @@
                 </a>
             </ul>
         </header>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">{{ message }}</div>
+        {% endfor %}
 
         {% block body %}{% endblock %}
 

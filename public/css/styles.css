@@ -73,7 +73,6 @@ footer {
 }
 
 header {
-  background-image: url(assets/img/violet3.jpg);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -85,9 +84,6 @@ header {
           align-items: center;
 }
 
-#rouge {
-  background-image: url(assets/img/rouge.jpg);
-}
 
 #menu:not(:target) {
   display: none;
@@ -146,7 +142,6 @@ img {
 }
 
 #confiture {
-  background-image: url(/public/assets/img/confiture.jpg);
   background-size: cover;
   background-position: center;
   margin: 22px;
@@ -157,7 +152,6 @@ img {
 }
 
 #glace {
-  background-image: url(/public/assets/img/glace3.jpg);
   background-size: cover;
   background-position: center;
   margin: 22px;
@@ -169,7 +163,6 @@ img {
 }
 
 #gateau {
-  background-image: url(/images/gateau2.jpg);
   background-size: cover;
   background-position: center;
   margin: 22px;
@@ -181,7 +174,6 @@ img {
 }
 
 #yaourt {
-  background-image: url(/images/yaourt2.jpg);
   background-size: cover;
   background-position: center;
   margin: 22px;
