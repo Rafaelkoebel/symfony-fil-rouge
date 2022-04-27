@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+    
+    <title>Acceuil</title>
+</head>
+<body>
+    <div id="rouge">
+        <header>
+            <a href="#menu">
+                <span class="iconify" id="burger"  data-icon="gg:menu" style="color: black;"></span>
+            </a>
+            <a href="Index.html">
+                <span class="iconify" data-icon="openmoji:strawberry" style="color: black;"></span>
+            </a>
+            <a href="#wrap">
+                <span class="iconify" data-icon="fluent:search-16-regular" style="color: black;"></span>
+            </a>
+            <ul id="menu">
+                <span class="iconify"id="logo_menu" data-icon="gg:menu" style="color: black;"></span>
+                <a href="/html/Compte.html">
+                    <li>Mon compte</li>
+                </a>
+                <a href="/html/Tendances.html">
+                    <li>Tendances</li>
+                </a>
+                <a href="/html/Recette.html">
+                    <li>Proposer une recette</li>
+                </a>
+                <a href="/html/Saisons.html">
+                    <li>Saisons</li>
+                </a>
+                <a href="/html/Minuteur.html">
+                    <li>Minuteur</li>
+                </a>
+            </ul>
+        </header>
+
+        {% block body %}{% endblock %}
+
+
+        <footer>
+            <div id="calc"> 
+                <div class="contact">
+                    <a href="/html/Contact.html" title="Contact">
+                        <span class="iconify" id="logo_contact"data-icon="fluent:contact-card-32-filled" style="color: black;"></span>
+                        <p id="contact">Contact</p>
+                    </a>
+                </div>
+                <p id="sommes">Qui sommes nous ?</p>
+                <div class="infos">
+                    <a href="/html/Infos.html" title="Informations">
+                        <span class="iconify" id="logo_infos" data-icon="bi:info-circle-fill" style="color: black;"></span>
+                        <p id="infos">Infos</p>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
