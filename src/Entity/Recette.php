@@ -53,9 +53,17 @@ class Recette
     #[ORM\OneToMany(mappedBy: 'recette', targetEntity: Commentaire::class, orphanRemoval: true)]
     private $commentaires;
 
+    #[ORM\OneToMany(mappedBy: 'recette', targetEntity: ProduitUtilisé::class)]
+    private $produitUtilisés;
+
+    #[ORM\OneToMany(mappedBy: 'recette', targetEntity: ModerationRecette::class, orphanRemoval: true)]
+    private $moderationRecettes;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->produitUtilisés = new ArrayCollection();
+        $this->moderationRecettes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -219,6 +227,66 @@ class Recette
             // set the owning side to null (unless already changed)
             if ($commentaire->getRecette() === $this) {
                 $commentaire->setRecette(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProduitUtilisé>
+     */
+    public function getProduitUtilisés(): Collection
+    {
+        return $this->produitUtilisés;
+    }
+
+    public function addProduitUtilis(ProduitUtilisé $produitUtilis): self
+    {
+        if (!$this->produitUtilisés->contains($produitUtilis)) {
+            $this->produitUtilisés[] = $produitUtilis;
+            $produitUtilis->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduitUtilis(ProduitUtilisé $produitUtilis): self
+    {
+        if ($this->produitUtilisés->removeElement($produitUtilis)) {
+            // set the owning side to null (unless already changed)
+            if ($produitUtilis->getRecette() === $this) {
+                $produitUtilis->setRecette(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModerationRecette>
+     */
+    public function getModerationRecettes(): Collection
+    {
+        return $this->moderationRecettes;
+    }
+
+    public function addModerationRecette(ModerationRecette $moderationRecette): self
+    {
+        if (!$this->moderationRecettes->contains($moderationRecette)) {
+            $this->moderationRecettes[] = $moderationRecette;
+            $moderationRecette->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModerationRecette(ModerationRecette $moderationRecette): self
+    {
+        if ($this->moderationRecettes->removeElement($moderationRecette)) {
+            // set the owning side to null (unless already changed)
+            if ($moderationRecette->getRecette() === $this) {
+                $moderationRecette->setRecette(null);
             }
         }
 

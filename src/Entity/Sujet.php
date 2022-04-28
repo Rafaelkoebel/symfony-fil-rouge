@@ -38,9 +38,13 @@ class Sujet
     #[ORM\OneToMany(mappedBy: 'sujet', targetEntity: Commentaire::class, orphanRemoval: true)]
     private $commentaires;
 
+    #[ORM\OneToMany(mappedBy: 'sujet', targetEntity: ModerationSujet::class, orphanRemoval: true)]
+    private $moderationSujets;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->moderationSujets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -144,6 +148,36 @@ class Sujet
             // set the owning side to null (unless already changed)
             if ($commentaire->getSujet() === $this) {
                 $commentaire->setSujet(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModerationSujet>
+     */
+    public function getModerationSujets(): Collection
+    {
+        return $this->moderationSujets;
+    }
+
+    public function addModerationSujet(ModerationSujet $moderationSujet): self
+    {
+        if (!$this->moderationSujets->contains($moderationSujet)) {
+            $this->moderationSujets[] = $moderationSujet;
+            $moderationSujet->setSujet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModerationSujet(ModerationSujet $moderationSujet): self
+    {
+        if ($this->moderationSujets->removeElement($moderationSujet)) {
+            // set the owning side to null (unless already changed)
+            if ($moderationSujet->getSujet() === $this) {
+                $moderationSujet->setSujet(null);
             }
         }
 

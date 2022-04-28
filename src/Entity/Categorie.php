@@ -27,10 +27,14 @@ class Categorie
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Recette::class)]
     private $recettes;
 
+    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: GestionCategorie::class, orphanRemoval: true)]
+    private $gestionCategories;
+
     public function __construct()
     {
         $this->sujets = new ArrayCollection();
         $this->recettes = new ArrayCollection();
+        $this->gestionCategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,6 +120,36 @@ class Categorie
             // set the owning side to null (unless already changed)
             if ($recette->getCategorie() === $this) {
                 $recette->setCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GestionCategorie>
+     */
+    public function getGestionCategories(): Collection
+    {
+        return $this->gestionCategories;
+    }
+
+    public function addGestionCategory(GestionCategorie $gestionCategory): self
+    {
+        if (!$this->gestionCategories->contains($gestionCategory)) {
+            $this->gestionCategories[] = $gestionCategory;
+            $gestionCategory->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGestionCategory(GestionCategorie $gestionCategory): self
+    {
+        if ($this->gestionCategories->removeElement($gestionCategory)) {
+            // set the owning side to null (unless already changed)
+            if ($gestionCategory->getCategorie() === $this) {
+                $gestionCategory->setCategorie(null);
             }
         }
 

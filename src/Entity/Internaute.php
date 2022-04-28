@@ -52,11 +52,31 @@ class Internaute implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'internaute', targetEntity: Commentaire::class)]
     private $commentaires;
 
+    #[ORM\OneToMany(mappedBy: 'internaute', targetEntity: Vente::class)]
+    private $ventes;
+
+    #[ORM\OneToMany(mappedBy: 'internaute', targetEntity: ModerationRecette::class)]
+    private $moderationRecettes;
+
+    #[ORM\OneToMany(mappedBy: 'internaute', targetEntity: ModerationCommentaire::class)]
+    private $moderationCommentaires;
+
+    #[ORM\OneToMany(mappedBy: 'internaute', targetEntity: ModerationSujet::class)]
+    private $moderationSujets;
+
+    #[ORM\OneToMany(mappedBy: 'internaute', targetEntity: GestionCategorie::class)]
+    private $gestionCategories;
+
     public function __construct()
     {
         $this->sujets = new ArrayCollection();
         $this->recettes = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->ventes = new ArrayCollection();
+        $this->moderationRecettes = new ArrayCollection();
+        $this->moderationCommentaires = new ArrayCollection();
+        $this->moderationSujets = new ArrayCollection();
+        $this->gestionCategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -292,6 +312,156 @@ class Internaute implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($commentaire->getInternaute() === $this) {
                 $commentaire->setInternaute(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Vente>
+     */
+    public function getVentes(): Collection
+    {
+        return $this->ventes;
+    }
+
+    public function addVente(Vente $vente): self
+    {
+        if (!$this->ventes->contains($vente)) {
+            $this->ventes[] = $vente;
+            $vente->setInternaute($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVente(Vente $vente): self
+    {
+        if ($this->ventes->removeElement($vente)) {
+            // set the owning side to null (unless already changed)
+            if ($vente->getInternaute() === $this) {
+                $vente->setInternaute(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModerationRecette>
+     */
+    public function getModerationRecettes(): Collection
+    {
+        return $this->moderationRecettes;
+    }
+
+    public function addModerationRecette(ModerationRecette $moderationRecette): self
+    {
+        if (!$this->moderationRecettes->contains($moderationRecette)) {
+            $this->moderationRecettes[] = $moderationRecette;
+            $moderationRecette->setInternaute($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModerationRecette(ModerationRecette $moderationRecette): self
+    {
+        if ($this->moderationRecettes->removeElement($moderationRecette)) {
+            // set the owning side to null (unless already changed)
+            if ($moderationRecette->getInternaute() === $this) {
+                $moderationRecette->setInternaute(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModerationCommentaire>
+     */
+    public function getModerationCommentaires(): Collection
+    {
+        return $this->moderationCommentaires;
+    }
+
+    public function addModerationCommentaire(ModerationCommentaire $moderationCommentaire): self
+    {
+        if (!$this->moderationCommentaires->contains($moderationCommentaire)) {
+            $this->moderationCommentaires[] = $moderationCommentaire;
+            $moderationCommentaire->setInternaute($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModerationCommentaire(ModerationCommentaire $moderationCommentaire): self
+    {
+        if ($this->moderationCommentaires->removeElement($moderationCommentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($moderationCommentaire->getInternaute() === $this) {
+                $moderationCommentaire->setInternaute(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModerationSujet>
+     */
+    public function getModerationSujets(): Collection
+    {
+        return $this->moderationSujets;
+    }
+
+    public function addModerationSujet(ModerationSujet $moderationSujet): self
+    {
+        if (!$this->moderationSujets->contains($moderationSujet)) {
+            $this->moderationSujets[] = $moderationSujet;
+            $moderationSujet->setInternaute($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModerationSujet(ModerationSujet $moderationSujet): self
+    {
+        if ($this->moderationSujets->removeElement($moderationSujet)) {
+            // set the owning side to null (unless already changed)
+            if ($moderationSujet->getInternaute() === $this) {
+                $moderationSujet->setInternaute(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GestionCategorie>
+     */
+    public function getGestionCategories(): Collection
+    {
+        return $this->gestionCategories;
+    }
+
+    public function addGestionCategory(GestionCategorie $gestionCategory): self
+    {
+        if (!$this->gestionCategories->contains($gestionCategory)) {
+            $this->gestionCategories[] = $gestionCategory;
+            $gestionCategory->setInternaute($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGestionCategory(GestionCategorie $gestionCategory): self
+    {
+        if ($this->gestionCategories->removeElement($gestionCategory)) {
+            // set the owning side to null (unless already changed)
+            if ($gestionCategory->getInternaute() === $this) {
+                $gestionCategory->setInternaute(null);
             }
         }
 

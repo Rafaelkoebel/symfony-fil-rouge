@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommentaireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentaireRepository::class)]
@@ -36,6 +38,14 @@ class Commentaire
 
     #[ORM\Column(type: 'boolean')]
     private $active;
+
+    #[ORM\OneToMany(mappedBy: 'commentaire', targetEntity: ModerationCommentaire::class, orphanRemoval: true)]
+    private $moderationCommentaires;
+
+    public function __construct()
+    {
+        $this->moderationCommentaires = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -122,6 +132,36 @@ class Commentaire
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModerationCommentaire>
+     */
+    public function getModerationCommentaires(): Collection
+    {
+        return $this->moderationCommentaires;
+    }
+
+    public function addModerationCommentaire(ModerationCommentaire $moderationCommentaire): self
+    {
+        if (!$this->moderationCommentaires->contains($moderationCommentaire)) {
+            $this->moderationCommentaires[] = $moderationCommentaire;
+            $moderationCommentaire->setCommentaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModerationCommentaire(ModerationCommentaire $moderationCommentaire): self
+    {
+        if ($this->moderationCommentaires->removeElement($moderationCommentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($moderationCommentaire->getCommentaire() === $this) {
+                $moderationCommentaire->setCommentaire(null);
+            }
+        }
 
         return $this;
     }
