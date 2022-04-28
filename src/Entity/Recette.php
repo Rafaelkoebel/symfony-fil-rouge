@@ -2,24 +2,39 @@
 
 namespace App\Entity;
 
-use App\Repository\SujetRepository;
+use App\Repository\RecetteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SujetRepository::class)]
-class Sujet
+#[ORM\Entity(repositoryClass: RecetteRepository::class)]
+class Recette
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 30)]
-    private $nom;
+    #[ORM\Column(type: 'string', length: 50)]
+    private $titre;
+
+    #[ORM\Column(type: 'integer')]
+    private $tempsTotal;
+
+    #[ORM\Column(type: 'integer')]
+    private $tempsPreparation;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $tempsCuisson;
 
     #[ORM\Column(type: 'text')]
-    private $contenu;
+    private $instruction;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $image;
+
+    #[ORM\Column(type: 'integer')]
+    private $difficulté;
 
     #[ORM\Column(type: 'boolean')]
     private $active;
@@ -27,15 +42,15 @@ class Sujet
     #[ORM\Column(type: 'datetime')]
     private $date_publication;
 
-    #[ORM\ManyToOne(targetEntity: Internaute::class, inversedBy: 'sujets')]
+    #[ORM\ManyToOne(targetEntity: Internaute::class, inversedBy: 'recettes')]
     #[ORM\JoinColumn(nullable: false)]
     private $internaute;
 
-    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'sujets')]
+    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'recettes')]
     #[ORM\JoinColumn(nullable: false)]
     private $categorie;
 
-    #[ORM\OneToMany(mappedBy: 'sujet', targetEntity: Commentaire::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'recette', targetEntity: Commentaire::class, orphanRemoval: true)]
     private $commentaires;
 
     public function __construct()
@@ -48,26 +63,86 @@ class Sujet
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getTitre(): ?string
     {
-        return $this->nom;
+        return $this->titre;
     }
 
-    public function setNom(string $nom): self
+    public function setTitre(string $titre): self
     {
-        $this->nom = $nom;
+        $this->titre = $titre;
 
         return $this;
     }
 
-    public function getContenu(): ?string
+    public function getTempsTotal(): ?int
     {
-        return $this->contenu;
+        return $this->tempsTotal;
     }
 
-    public function setContenu(string $contenu): self
+    public function setTempsTotal(int $tempsTotal): self
     {
-        $this->contenu = $contenu;
+        $this->tempsTotal = $tempsTotal;
+
+        return $this;
+    }
+
+    public function getTempsPreparation(): ?int
+    {
+        return $this->tempsPreparation;
+    }
+
+    public function setTempsPreparation(int $tempsPreparation): self
+    {
+        $this->tempsPreparation = $tempsPreparation;
+
+        return $this;
+    }
+
+    public function getTempsCuisson(): ?int
+    {
+        return $this->tempsCuisson;
+    }
+
+    public function setTempsCuisson(int $tempsCuisson): self
+    {
+        $this->tempsCuisson = $tempsCuisson;
+
+        return $this;
+    }
+
+    public function getInstruction(): ?string
+    {
+        return $this->instruction;
+    }
+
+    public function setInstruction(string $instruction): self
+    {
+        $this->instruction = $instruction;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getDifficulté(): ?int
+    {
+        return $this->difficulté;
+    }
+
+    public function setDifficulté(int $difficulté): self
+    {
+        $this->difficulté = $difficulté;
 
         return $this;
     }
@@ -132,7 +207,7 @@ class Sujet
     {
         if (!$this->commentaires->contains($commentaire)) {
             $this->commentaires[] = $commentaire;
-            $commentaire->setSujet($this);
+            $commentaire->setRecette($this);
         }
 
         return $this;
@@ -142,8 +217,8 @@ class Sujet
     {
         if ($this->commentaires->removeElement($commentaire)) {
             // set the owning side to null (unless already changed)
-            if ($commentaire->getSujet() === $this) {
-                $commentaire->setSujet(null);
+            if ($commentaire->getRecette() === $this) {
+                $commentaire->setRecette(null);
             }
         }
 

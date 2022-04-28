@@ -46,9 +46,17 @@ class Internaute implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'internaute', targetEntity: Sujet::class, orphanRemoval: true)]
     private $sujets;
 
+    #[ORM\OneToMany(mappedBy: 'internaute', targetEntity: Recette::class)]
+    private $recettes;
+
+    #[ORM\OneToMany(mappedBy: 'internaute', targetEntity: Commentaire::class)]
+    private $commentaires;
+
     public function __construct()
     {
         $this->sujets = new ArrayCollection();
+        $this->recettes = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -224,6 +232,66 @@ class Internaute implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($sujet->getInternaute() === $this) {
                 $sujet->setInternaute(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Recette>
+     */
+    public function getRecettes(): Collection
+    {
+        return $this->recettes;
+    }
+
+    public function addRecette(Recette $recette): self
+    {
+        if (!$this->recettes->contains($recette)) {
+            $this->recettes[] = $recette;
+            $recette->setInternaute($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecette(Recette $recette): self
+    {
+        if ($this->recettes->removeElement($recette)) {
+            // set the owning side to null (unless already changed)
+            if ($recette->getInternaute() === $this) {
+                $recette->setInternaute(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setInternaute($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getInternaute() === $this) {
+                $commentaire->setInternaute(null);
             }
         }
 
