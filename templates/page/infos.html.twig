@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Hello PageController!{% endblock %}
+
+{% block body %}
+<main style="height: 1200px">
+    <input type="text"id="wrap"placeholder="Recherche..."/>
+    <div id="pc">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ path('app_login') }}">Mon compte</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_recette') }}">Proposer une recette</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_saisons') }}">Saisons</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_minuteur') }}">Minuteur</a>
+            </li>
+        </ul>
+    </div>
+    <div class="article">
+        <span class="iconify" id="logo_infos" data-icon="bi:info-circle-fill" style="color: black;"></span>
+        <h1 id="infos">Informations:</h1>
+    </div>
+    <div class="footer">
+        <p>Qui sommes-nous ?</p>
+        <p>Forum</p>
+        <p>Nous rejoindre</p>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Hello PageController!{% endblock %}
+
+{% block body %}
+<main>
+    <input type="text"id="wrap"placeholder="Recherche..."/>
+    <div id="pc">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ path('app_login') }}">Mon compte</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_recette') }}">Proposer une recette</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_saisons') }}">Saisons</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_minuteur') }}">Minuteur</a>
+            </li>
+        </ul>
+    </div>
+        <form action="traitement.php"method="post">
+                <legend>Formulaire:</legend> 
+                
+                <label for="nom">Nom: </label>
+                    <input type="text" name="nom" id="nom" minlength="3" required/><br/>
+                
+                <label for="total">Temps totale:</label>
+                    <input type="number" name="total" id="total" min="0" placeholder="minutes" required/><br>
+                    
+                <label for="preparation">Temps de préparation:</label>
+                    <input type="number" name="preparation" id="preparation" min="0" placeholder="minutes" required/><br>
+                
+                <label for="cuisson">Temps de cuisson:</label>
+                    <input type="number" name="cuisson" id="cuisson" min="0" placeholder="minutes" required/><br>
+
+                <label for="ingredients">Ingrédients:</label>
+                    <select id="ingredients" name="ingredients" multiple required>
+                        <option value="farine">Farine</option>
+                        <option value="beurre">Beurre</option>
+                        <option value="sucre">Sucre</option>
+                        <option value="canelle">Canelle</option>
+                        <option value="miel">Miel</option>
+                        <option value="oeuf">Oeufs</option>
+                        <option value="groseille">Groseilles</option>
+                        <option value="fraise">Fraises</option>
+                        <option value="framboise">Framboises</option>
+                        <option value="myrtille">Myrtilles</option>
+                        <option value="cerise">Cesises</option>
+                        <option value="nergi">Nergis</option> 
+                    </select><br>
+                    
+                <label for="ustensiles">Ustensiles:</label>
+                    <select id="ustensiles" name="ustensiles" multiple required>
+                        <option value="chinois">Chinois</option>
+                        <option value="casserole">Casserole</option>
+                        <option value="cuillière en bois">Cuillière en bois</option>
+                        <option value="couteau">Couteau</option>
+                        <option value="fouet">Fouet</option>
+                        <option value="mixeur">Mixeur</option>
+                        <option value="four">Four</option>
+                        <option value="rape">Râpe</option>
+                        <option value="bol">Bol</option>
+                        <option value="saladier">Saladier</option>
+                        <option value="congelateur">Congélateur</option>
+                    </select><br>
+                
+                <label for="tags">Tags:</label>
+                    <select id="tags" name="tags" multiple required>
+                        <option value="facile">Facile</option>
+                        <option value="rapide">Rapide</option>
+                        <option value="pas cher">Pas cher</option>
+                        <option value="printemps">Printemps</option>
+                        <option value="automne">Automne</option>
+                        <option value="été">Été</option>
+                        <option value="hiver">Hiver</option>
+                        <option value="confiture">Confiture</option>
+                        <option value="glace">Glace</option>
+                        <option value="Gateau">Gâteau</option>
+                        <option value="cerise">Cesise</option>
+                        <option value="yaourt">Yaourt</option> 
+                    </select><br>
+                
+                <label for="difficulté">Difficulté:</label>
+                    <input type="range" name="difficulté" id="difficulté" min="1" max="5"required/><br/>
+
+                <label for="precedure">Procédure:</label>
+                    <textarea name="procedure" id="procedure" cols="30" rows="3"></textarea>
+
+                <label for="note">Notes:</label>
+                    <textarea name="note" id="note" cols="30" rows="3"></textarea>
+
+                <input type="submit" value="Poster" id="submit" />
+        </form>
+    </main>
+{% endblock %}

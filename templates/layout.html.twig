@@ -19,7 +19,7 @@
             <a href="#menu">
                 <span class="iconify" id="burger"  data-icon="gg:menu" style="color: black;"></span>
             </a>
-            <a href="Index.html">
+            <a href="{{ path('app_home') }}">
                 <span class="iconify" data-icon="openmoji:strawberry" style="color: black;"></span>
             </a>
             <a href="#wrap">
@@ -27,19 +27,19 @@
             </a>
             <ul id="menu">
                 <span class="iconify"id="logo_menu" data-icon="gg:menu" style="color: black;"></span>
-                <a href="/html/Compte.html">
+                <a href="{{ path('app_login') }}">
                     <li>Mon compte</li>
                 </a>
                 <a href="/html/Tendances.html">
                     <li>Tendances</li>
                 </a>
-                <a href="/html/Recette.html">
+                <a href="{{ path('app_recette') }}">
                     <li>Proposer une recette</li>
                 </a>
-                <a href="/html/Saisons.html">
+                <a href="{{ path('app_saisons') }}">
                     <li>Saisons</li>
                 </a>
-                <a href="/html/Minuteur.html">
+                <a href="{{ path('app_minuteur') }}">
                     <li>Minuteur</li>
                 </a>
             </ul>
@@ -54,16 +54,14 @@
         <footer>
             <div id="calc"> 
                 <div class="contact">
-                    <a href="/html/Contact.html" title="Contact">
+                    <a href="{{ path('app_contact') }}" title="Contact">
                         <span class="iconify" id="logo_contact"data-icon="fluent:contact-card-32-filled" style="color: black;"></span>
-                        <p id="contact">Contact</p>
                     </a>
                 </div>
-                <p id="sommes">Qui sommes nous ?</p>
+                <a id="sommes" href="{{ path('app_infos') }}">Qui sommes nous ?</a>
                 <div class="infos">
-                    <a href="/html/Infos.html" title="Informations">
+                    <a href="{{ path('app_infos') }}" title="Informations">
                         <span class="iconify" id="logo_infos" data-icon="bi:info-circle-fill" style="color: black;"></span>
-                        <p id="infos">Infos</p>
                     </a>
                 </div>
             </div>

@@ -5,33 +5,41 @@
 {% block body %}
 <main>
     <input type="text"id="wrap"placeholder="Recherche..."/>
-        <div id="pc">
-            <ul>
-                <li>Mon compte</li>
-                <li>Proposer une recette</li>
-                <li>Saisons</li>
-                <li>Minuteur</li>
-            </ul>
-        </div>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/cA02sRHo9-8" title="YouTube video player" id="video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <div class="bloc">
-            {% block imagec %}
-            <h1 id="confiture" style="background-image: url('{{ asset('assets/img/confiture.jpg') }}')">
-            {% endblock %}
-            Confitures</h1>
-            {% block imageg %}
-            <h1 id="glace" style="background-image: url('{{ asset('assets/img/glace3.jpg') }}')">
-            {% endblock %}
-            Glaces</h1>
-            {% block imagega %}
-            <h1 id="gateau" style="background-image: url('{{ asset('assets/img/gateau2.jpg') }}')">
-            {% endblock %}
-            Gâteaux</h1>
-            {% block imagey %}
-            <h1 id="yaourt" style="background-image: url('{{ asset('assets/img/yaourt2.jpg') }}')">
-            {% endblock %}
-            Yaourts</h1>
-        </div>
+    <div id="pc">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ path('app_login') }}">Mon compte</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_recette') }}">Proposer une recette</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_saisons') }}">Saisons</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_minuteur') }}">Minuteur</a>
+            </li>
+        </ul>
+    </div>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/cA02sRHo9-8" title="YouTube video player" id="video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="bloc">
+        {% block imagec %}
+        <h1 id="confiture" style="background-image: url('{{ asset('assets/img/confiture.jpg') }}')">
+        {% endblock %}
+        Confitures</h1>
+        {% block imageg %}
+        <h1 id="glace" style="background-image: url('{{ asset('assets/img/glace3.jpg') }}')">
+        {% endblock %}
+        Glaces</h1>
+        {% block imagega %}
+        <h1 id="gateau" style="background-image: url('{{ asset('assets/img/gateau2.jpg') }}')">
+        {% endblock %}
+        Gâteaux</h1>
+        {% block imagey %}
+        <h1 id="yaourt" style="background-image: url('{{ asset('assets/img/yaourt2.jpg') }}')">
+        {% endblock %}
+        Yaourts</h1>
+    </div>
         
 </main>
 
