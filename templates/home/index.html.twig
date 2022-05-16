@@ -4,23 +4,7 @@
 
 {% block body %}
 <main>
-    <input type="text"id="wrap"placeholder="Recherche..."/>
-    <div id="pc">
-        <ul class="nav nav-pills nav-fill">
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ path('app_login') }}">Mon compte</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_recette') }}">Proposer une recette</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_saisons') }}">Saisons</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_minuteur') }}">Minuteur</a>
-            </li>
-        </ul>
-    </div>
+    
     <iframe width="560" height="315" src="https://www.youtube.com/embed/cA02sRHo9-8" title="YouTube video player" id="video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <div class="bloc">
         {% block imagec %}

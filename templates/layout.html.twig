@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
     <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     
     <title>Acceuil</title>
 </head>
 <body>
-        {% block imageb %}
-        <div id="rouge" style="background-image: url('{{ asset('assets/img/rouge.jpg') }}')">
-        {% endblock %}
+    {% block imageb %}
+    <div id="rouge" style="background-image: url('{{ asset('assets/img/rouge.jpg') }}')">
+    {% endblock %}
         {% block imageh %}
         <header style="background-image: url('{{ asset('assets/img/violet3.jpg') }}')">
         {% endblock %}
@@ -43,7 +44,32 @@
                     <li>Minuteur</li>
                 </a>
             </ul>
-        </header>
+            <nav class="navbar navbar-light bg-transparent">
+                <div class="container-fluid">
+                  <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                  </form>
+                </div>
+              </nav>
+            </header>
+    <div id="pc">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ path('app_login') }}">Mon compte</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_recette') }}">Proposer une recette</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_saisons') }}">Saisons</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_minuteur') }}">Minuteur</a>
+            </li>
+        </ul>
+    </div>
+
         {% for message in app.flashes('success') %}
             <div class="alert alert-success" role="alert">{{ message }}</div>
         {% endfor %}
@@ -67,5 +93,6 @@
             </div>
         </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>
